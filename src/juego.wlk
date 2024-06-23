@@ -37,11 +37,7 @@ object juego {
 		keyboard.enter().onPressDo{
 			game.removeVisual(bienvenida)
 			self.primerNivel()
-<<<<<<< HEAD
 			musica.fondo()
-=======
-		musica.fondo()
->>>>>>> 534a3b67d232f1510093554dcca890eb90c2fad5
 		}
 		game.start()
 	}
