@@ -3,20 +3,24 @@ import tanque.*
 import clases.*
 import configuraciones.*
 import tablero.*
+import pantalla.* 
+import sonidos.*
+
 const corazon1= new Corazon(position=game.at(0,19))
 const corazon2= new Corazon(position=game.at(1,19))
 const corazon3= new Corazon(position=game.at(2,19))
 
 object juego {
-	var nivel = 1
-	method nivel() = nivel
-	method siguienteNivel() { nivel += 1}
+	//var nivel = 1
+	//method nivel() = nivel
+	//method siguienteNivel() { nivel += 1}
 	
 	method primerNivel(){
-		game.boardGround("nivel1.jpg")
+		game.addVisual(fondo)
 		game.addVisual(corazon1)
 		game.addVisual(corazon2)
 		game.addVisual(corazon3)
+		musica.fondo()
 		tanque.irAlInicio()
 		game.addVisual(tanque)
 		tablero.dibujarMuros()
@@ -29,9 +33,9 @@ object juego {
 		game.width(20)
 		game.height(20)
 		game.cellSize(32)
-		game.addVisual(pantallaDeInicio)
+		game.addVisual(bienvenida)
 		keyboard.enter().onPressDo{
-			pantallaDeInicio.iniciarJuego()
+			game.removeVisual(bienvenida)
 			self.primerNivel()
 		}
 		game.start()

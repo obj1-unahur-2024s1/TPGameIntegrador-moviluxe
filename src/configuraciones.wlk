@@ -3,6 +3,7 @@ import wollok.game.*
 import movimientos.*
 import clases.*
 import tablero.*
+import pantalla.*
 
 object configuracion {
 	
@@ -20,15 +21,4 @@ object configuracion {
 		keyboard.left().onPressDo {tanque.moverIzquierda()}
 	}
 	
-}
-
-object pantallaDeInicio{
-	const property image = "fondoBienvenida.png"
-	var property position = game.origin()
-	
-	method iniciarJuego(){
-		keyboard.enter().onPressDo{
-			game.removeVisual(self)
-		}
-	}
 }
