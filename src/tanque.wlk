@@ -2,6 +2,7 @@ import wollok.game.*
 import movimientos.*
 import clases.*
 import juego.*
+import sonidos.*
 
 object tanque{
 	var property position
@@ -13,7 +14,7 @@ object tanque{
 	
 	method image() { return "tanque" + self.direccion() + ".png"}
 	
-	method perderVida(){
+	method recibirDanio(){
 		vidas -= 1
 		if(self.vidas() == 2){
 			game.removeVisual(corazon3)
@@ -31,7 +32,7 @@ object tanque{
 	method estaVivo() = vidas >= 1
 	
 	method impacto(unaBala){
-		self.perderVida()
+		self.recibirDanio()
  		game.removeVisual(unaBala)
  	}
 	
@@ -65,10 +66,11 @@ object tanque{
 		if (!game.getObjectsIn(position.left(1)).any({o => o.esMuro()}))
 		movimiento.izquierda(self)
 		else self.position()}
-		
 	method disparar(){
-		const bala = new Bala(image="bala.png", objeto = self )
-		    game.addVisual(bala)
-		    bala.movDisparo()
-	}
+        const bala = new Bala(image="bala.png", objeto = self,tick = "disparoPersonaje" )
+            game.addVisual(bala)
+            bala.disparar()
+            musica.disparo()
+            game.onCollideDo(bala,{algo => if(algo.esEnemigo())algo.impacto(bala)} )
+     }
 }

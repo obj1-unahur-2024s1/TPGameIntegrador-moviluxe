@@ -7,14 +7,12 @@ import tablero.*
 object configuracion {
 	
 		method teclado(){
-		keyboard.space().onPressDo {
-			if (tanque.cargado()){
-				tanque.cargado(false)
-				//const bala = new Bala(image="bala.png")
-	    		//game.addVisual(bala)
-				tanque.disparar()
-				game.schedule(2000,{tanque.cargado(true)})
-			}
+        keyboard.space().onPressDo {
+            if (tanque.cargado()){
+                tanque.cargado(false)
+                tanque.disparar()
+                game.schedule(2000,{tanque.cargado(true)})
+            }
 		}	
 		
 		keyboard.up().onPressDo {tanque.moverArriba()}

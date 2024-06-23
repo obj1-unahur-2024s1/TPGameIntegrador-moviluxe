@@ -20,7 +20,7 @@ object juego {
 		game.addVisual(corazon3)
 		tanque.irAlInicio()
 		game.addVisual(tanque)
-		//tablero.dibujarMuros()
+		tablero.dibujarMuros()
 		tablero.agregarEnemigos()
 		configuracion.teclado()
 		game.start()

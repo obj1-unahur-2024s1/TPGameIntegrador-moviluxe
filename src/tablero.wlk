@@ -4,7 +4,6 @@ import juego.*
 import tanque.*
 
 object tablero {
-	/*
 	method dibujarMuros() {
 		self.agregarMuroEn(15,2)
 		self.agregarMuroEn(14,2)
@@ -108,9 +107,7 @@ object tablero {
 		self.agregarMuroEn(4,3)
 		self.agregarMuroEn(5,2)
 		self.agregarMuroEn(4,2)
-		* MEJORAR
 	}
-	*/
 	
 	method agregarMuroEn(x, y) {
 		const muro = new Obstaculo(position = game.at(x,y), esMuro = true)
@@ -130,7 +127,7 @@ object tablero {
 	method agregarEnemigosEn(x,y){
 		const enemigo = new TanqueEnemigo(position= game.at(x,y), color="azul")
 		game.addVisual(enemigo)
-		//game.onCollideDo(enemigo, {algo => algo.esMuro()})
+		game.onCollideDo(enemigo, {algo => algo.detener()})
 	}
 
 }
@@ -138,4 +135,5 @@ object tablero {
 class Obstaculo{	
 	var property position
 	const property esMuro
+	const property esEnemigo = false
 }
