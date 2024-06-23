@@ -1,4 +1,5 @@
 import wollok.game.*
+import sonidos.*
 import tanque.*
 import clases.*
 import configuraciones.*
@@ -33,6 +34,7 @@ object juego {
 		keyboard.enter().onPressDo{
 			pantallaDeInicio.iniciarJuego()
 			self.primerNivel()
+		musica.fondo()
 		}
 		game.start()
 	}
