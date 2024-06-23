@@ -21,12 +21,16 @@ object tanque{
 		}else if(self.vidas()==1){
 			game.removeVisual(corazon2)
 		}else if(self.vidas()==0){
+			game.removeVisual(corazon1)
+			game.say(self, "Perdiste")
+			self.desaparecer()
 		}
 	}
 	
-	
 	method desaparecer(){
+		const explosion = new Explosion (position = self.position())
 		game.removeVisual(self)
+        game.addVisual(explosion)    
 	}
 	
 	method estaVivo() = vidas >= 1

@@ -14,7 +14,6 @@ object configuracion {
                 game.schedule(2000,{tanque.cargado(true)})
             }
 		}	
-		
 		keyboard.up().onPressDo {tanque.moverArriba()}
 		keyboard.down().onPressDo {tanque.moverAbajo()}
 		keyboard.right().onPressDo {tanque.moverDerecha()}
