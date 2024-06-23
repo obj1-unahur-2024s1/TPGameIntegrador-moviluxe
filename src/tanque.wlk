@@ -20,11 +20,21 @@ object tanque{
 		}else if(self.vidas()==1){
 			game.removeVisual(corazon2)
 		}else if(self.vidas()==0){
-				
 		}
 	}
 	
-	method detener(){}
+	
+	method desaparecer(){
+		game.removeVisual(self)
+	}
+	
+	method estaVivo() = vidas >= 1
+	
+	method impacto(unaBala){
+		self.perderVida()
+ 		game.removeVisual(unaBala)
+ 	}
+	
 	method irAlInicio() { 
 		position = game.origin()
 	}
@@ -57,7 +67,7 @@ object tanque{
 		else self.position()}
 		
 	method disparar(){
-		const bala = new Bala(image="bala.png")
+		const bala = new Bala(image="bala.png", objeto = self )
 		    game.addVisual(bala)
 		    bala.movDisparo()
 	}

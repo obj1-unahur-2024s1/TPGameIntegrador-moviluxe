@@ -4,6 +4,7 @@ import juego.*
 import tanque.*
 
 object tablero {
+	/*
 	method dibujarMuros() {
 		self.agregarMuroEn(15,2)
 		self.agregarMuroEn(14,2)
@@ -107,7 +108,9 @@ object tablero {
 		self.agregarMuroEn(4,3)
 		self.agregarMuroEn(5,2)
 		self.agregarMuroEn(4,2)
+		* MEJORAR
 	}
+	*/
 	
 	method agregarMuroEn(x, y) {
 		const muro = new Obstaculo(position = game.at(x,y), esMuro = true)

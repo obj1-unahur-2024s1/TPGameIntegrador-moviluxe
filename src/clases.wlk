@@ -7,7 +7,8 @@ import juego.*
 
 class Bala {
 	var property image
-	var property direccion = tanque.direccion()
+	var property direccion = objeto.direccion()
+	var property objeto
 	var property position = 
 		if(tanque.direccion() == "norte"){
 			tanque.position().up(1)
@@ -21,7 +22,7 @@ class Bala {
 		
 	method movDisparo(){
 		game.onTick(1000 , "moverse",{self.disparar()})
-		game.onCollideDo(self , {algo => algo.detener()})
+		//game.onCollideDo(self , {algo => algo.detener()})
 		game.onCollideDo(self, {algo => algo.impacto(self)})
 	}
 
@@ -39,10 +40,6 @@ class Bala {
 		})	
 	}
 	
-	method impacto(unaBala) {
-		
-	}
-	
 	method detener(){
 		game.removeTickEvent("disparo")
 		game.removeVisual(self)
@@ -57,7 +54,7 @@ class Corazon {
 class TanqueEnemigo {
 	var property position = null
 	var property image = self.direccion()
-	var property direccion = "oeste"
+	var property direccion = "sur"
 	var property vidas = 3
 	const property color
 	var property cargado = true
@@ -65,27 +62,38 @@ class TanqueEnemigo {
 	
 	method image() { return "tanque" + color + self.direccion() + ".png"}	
 	
+	method iniciarAtaque() {
+		game.onTick(1000, "ataque", {self.atacar()})
+	}
+	
+	method atacar() {
+		const bala = new Bala(image="bala.png", objeto = self)
+		game.addVisual(bala)
+		bala.movDisparo()
+		game.onCollideDo(bala, {algo => algo.impacto(bala)})
+	}
+	
 	method recibirDanio() {
-		vidas = (vidas - 1).max(0)
+		if(self.estaVivo()){
+			vidas = 0.max(vidas - 1)
+			if (vidas == 0) {
+				vidas = 0
+				self.desaparecer()
+			}
+		}
 	}
 	
 	method desaparecer(){
-		if(!self.estaVivo() && game.hasVisual(self)){
-			game.removeVisual(self)
-		}
+		game.removeVisual(self)
 	}
 	
 	method estaVivo() = vidas >= 1
 	
 	method impacto(unaBala){
 		self.recibirDanio()
- 		self.desaparecer()
  		game.removeVisual(unaBala)
  	}
 	
-	method serImpactado() { 
-		self.recibirDanio()
-	}
 	/*
 	method darUnPaso(ubicacionTanque){
 		if (self.position().x() < ubicacionTanque.x()){
