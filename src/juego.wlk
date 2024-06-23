@@ -12,12 +12,8 @@ object juego {
 	method nivel() = nivel
 	method siguienteNivel() { nivel += 1}
 	
-	method iniciar(){
-		game.title("WAR TANK")
-		game.width(20)
-		game.height(20)
-		game.cellSize(32)
-		//game.boardGround("nivel1.jpg")
+	method primerNivel(){
+		game.boardGround("nivel1.jpg")
 		game.addVisual(corazon1)
 		game.addVisual(corazon2)
 		game.addVisual(corazon3)
@@ -26,6 +22,19 @@ object juego {
 		tablero.dibujarMuros()
 		tablero.agregarEnemigos()
 		configuracion.teclado()
+	}
+	
+	method iniciar(){
+		game.title("WAR TANK")
+		game.width(20)
+		game.height(20)
+		game.cellSize(32)
+		game.addVisual(pantallaDeInicio)
+		keyboard.enter().onPressDo{
+			pantallaDeInicio.iniciarJuego()
+			self.primerNivel()
+		}
 		game.start()
 	}
+	
 }

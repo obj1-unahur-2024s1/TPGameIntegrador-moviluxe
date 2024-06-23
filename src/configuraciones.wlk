@@ -21,3 +21,14 @@ object configuracion {
 	}
 	
 }
+
+object pantallaDeInicio{
+	const property image = "fondoBienvenida.png"
+	var property position = game.origin()
+	
+	method iniciarJuego(){
+		keyboard.enter().onPressDo{
+			game.removeVisual(self)
+		}
+	}
+}
