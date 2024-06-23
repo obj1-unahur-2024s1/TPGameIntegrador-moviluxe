@@ -20,7 +20,6 @@ object juego {
 		game.addVisual(corazon1)
 		game.addVisual(corazon2)
 		game.addVisual(corazon3)
-		musica.fondo()
 		tanque.irAlInicio()
 		game.addVisual(tanque)
 		tablero.dibujarMuros()
@@ -37,6 +36,7 @@ object juego {
 		keyboard.enter().onPressDo{
 			game.removeVisual(bienvenida)
 			self.primerNivel()
+			musica.fondo()
 		}
 		game.start()
 	}
