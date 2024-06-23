@@ -10,9 +10,9 @@ object configuracion {
 		keyboard.space().onPressDo {
 			if (tanque.cargado()){
 				tanque.cargado(false)
-				const bala = new Bala(image="bala.png")
-	    		game.addVisual(bala)
-				bala.disparar()
+				//const bala = new Bala(image="bala.png")
+	    		//game.addVisual(bala)
+				tanque.disparar()
 				game.schedule(2000,{tanque.cargado(true)})
 			}
 		}	

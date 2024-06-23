@@ -114,17 +114,22 @@ object tablero {
 		game.addVisual(muro)
 		game.onCollideDo(muro, {algo => algo.detener()})
 	}
-	/*
+	
 	method agregarEnemigos() {
-		self.agregarEnemigoEn(x,y)
+		self.agregarEnemigosEn(17,18)
+		self.agregarEnemigosEn(2,17)
+		self.agregarEnemigosEn(17,1)
+		self.agregarEnemigosEn(10,5)
+		self.agregarEnemigosEn(18,6)
+		self.agregarEnemigosEn(0,4)
 	}
 	
 	method agregarEnemigosEn(x,y){
-		const enemigo = new TanqueEnemigo()
+		const enemigo = new TanqueEnemigo(position= game.at(x,y), color="azul")
 		game.addVisual(enemigo)
-		gane.onCollideDo(enemigo, {algo => algo.recibirDanio()})
+		//game.onCollideDo(enemigo, {algo => algo.esMuro()})
 	}
-	*/
+
 }
 
 class Obstaculo{	

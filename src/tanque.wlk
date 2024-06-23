@@ -23,6 +23,7 @@ object tanque{
 				
 		}
 	}
+	
 	method detener(){}
 	method irAlInicio() { 
 		position = game.origin()
@@ -54,4 +55,10 @@ object tanque{
 		if (!game.getObjectsIn(position.left(1)).any({o => o.esMuro()}))
 		movimiento.izquierda(self)
 		else self.position()}
+		
+	method disparar(){
+		const bala = new Bala(image="bala.png")
+		    game.addVisual(bala)
+		    bala.movDisparo()
+	}
 }

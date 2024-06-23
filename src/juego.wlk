@@ -21,7 +21,13 @@ object juego {
 		tanque.irAlInicio()
 		game.addVisual(tanque)
 		tablero.dibujarMuros()
+		tablero.agregarEnemigos()
 		configuracion.teclado()
 		game.start()
 	}
+	
+	method posicionAleatoria()= game.at(
+		0.randomUpTo(game.width()),
+		0.randomUpTo(game.height())
+	)
 }
