@@ -10,6 +10,10 @@ class Bala {
     var property direccion = objeto.direccion()
     const objeto
     const tick 
+    const property esEnemigo = false
+    const property esMuro = false
+    const property esAliado = false
+    
     var property position = 
         if(direccion == "norte"){
             objeto.position().up(1)
@@ -49,6 +53,7 @@ class Corazon {
 	const property position 
 	var property esMuro = false
     const property esEnemigo = false
+    const property esAliado = false
 	method image() = "corazon.png"
 }
 
@@ -62,23 +67,28 @@ class TanqueEnemigo {
     var property cargado = true
     var property esEnemigo = true
     const property esMuro = true
+    const property esAliado = false
+    var id = ids.nuevoId()
+    
+    
     const movimiento = new MovimientoTanque()
 
     method image() { return "tanque" + color + self.direccion() + ".png"}
 
+	
     method iniciarAtaque() {
-        game.onTick(4000, "ataque", {self.atacar()})
-        game.schedule(2000,{self.cargado(true)})
+    		game.onTick(4000, "ataque" + id.toString(), {self.atacar()})
+        	game.schedule(2000,{self.cargado(true)})
     }
 
     method atacar() {
-        if (self.cargado())
-                self.cargado(false)
-        const bala = new Bala(image="bala.png", objeto = self, tick = "balaenemiga")
-        game.addVisual(bala)
-        bala.disparar()
-        game.onCollideDo(bala, {algo => algo.impacto(bala)})
-        }
+	        if (self.cargado())
+	                self.cargado(false)
+	        const bala = new Bala(image="bala.png", objeto = self, tick = "balaenemiga")
+	        game.addVisual(bala)
+	        bala.disparar()
+	        game.onCollideDo(bala, {algo => if(algo.esAliado())algo.impacto(bala)})
+    }
 
     method recibirDanio() {
         if(self.estaVivo()){
@@ -86,7 +96,7 @@ class TanqueEnemigo {
             if (vidas == 0) {
                 vidas = 0
                 self.desaparecer()
-                
+                game.removeTickEvent("ataque" + id.toString())
             }
         }
     }
@@ -97,7 +107,7 @@ class TanqueEnemigo {
         game.addVisual(explosion)    
     }
 
-    method estaVivo() = vidas >= 1
+    method estaVivo() = self.vidas() >= 1
 
     method impacto(unaBala){
         self.recibirDanio()
@@ -162,9 +172,23 @@ class Explosion {
     var property position
     var image = "burst.png"
     var property esMuro = false
+    const property esAliado = false
     const property esEnemigo = false
 
     method image() = image
+}
 
+class Obstaculo{	
+	var property position
+	const property esMuro
+	const property image
+	const property esEnemigo = false
+	const property esAliado = false
+}
 
+object ids{
+	method nuevoId(){
+		return 1.randomUpTo(50).truncate(0)
+	}
+	
 }

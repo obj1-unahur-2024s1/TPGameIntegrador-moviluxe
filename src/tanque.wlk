@@ -11,7 +11,10 @@ object tanque{
 	var property vidas = 3
 	const movimiento = new MovimientoTanque()
 	var property cargado = true
-	
+	const property esEnemigo = false
+	const property esMuro = true
+	const property esAliado = true
+		
 	method image() { return "tanque" + self.direccion() + ".png"}
 	
 	method recibirDanio(){
@@ -41,7 +44,7 @@ object tanque{
  	}
 	
 	method irAlInicio() { 
-		position = game.origin()
+		position = game.at(1,0)
 	}
 	method mirarDestino(destino) { direccion = destino} 
 	

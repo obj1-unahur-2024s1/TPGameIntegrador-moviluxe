@@ -128,14 +128,8 @@ object tablero {
         const enemigo = new TanqueEnemigo(position= game.at(x,y), color= color)
         game.addVisual(enemigo)
         game.onCollideDo(enemigo, {algo => algo.detener()})
-       // enemigo.movimientoEnemigos()
+        enemigo.movimientoEnemigos()
 		enemigo.iniciarAtaque()
     }
 }
 
-class Obstaculo{	
-	var property position
-	const property esMuro
-	const property image
-	const property esEnemigo = false
-}

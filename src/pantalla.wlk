@@ -12,6 +12,8 @@ const siguienteNivel = new Pantalla(image = "siguienteNivel.png", position = gam
 object fondo {
 	const property image = "fondo.png"
 	const property position = game.origin()
-	const property esMuro = false
+	const property esMuro = true
 	const property esEnemigo = false
+	const property esAliado = false
+	
 }
