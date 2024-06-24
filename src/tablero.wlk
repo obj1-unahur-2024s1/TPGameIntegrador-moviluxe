@@ -190,7 +190,7 @@ object tablero {
         //self.agregarEnemigosEn(17,18,"azul")
         //self.agregarEnemigosEn(2,17,"naranja")
         //self.agregarEnemigosEn(17,1,"violeta")
-        //self.agregarEnemigosEn(10,5,"azul")
+        self.agregarEnemigosEn(10,5,"azul")
         self.agregarEnemigosEn(18,6,"naranja")
         self.agregarEnemigosEn(0,4,"violeta")
     }
