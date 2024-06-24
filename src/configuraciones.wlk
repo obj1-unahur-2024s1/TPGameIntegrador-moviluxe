@@ -5,6 +5,8 @@ import clases.*
 import tablero.*
 import pantalla.*
 import sonidos.*
+import nivel2.*
+import juego.*
 
 object configuracion {
 	
@@ -23,10 +25,18 @@ object configuracion {
 	}
 	
 	method pasarAlProximo(){
-		musicaFondo.detenerMusica()
-		musica.disparo()
 		game.addVisual(siguienteNivel)
-		keyboard.q().onPressDo{
+		juego.esNivelUno(false)
+		keyboard.enter().onPressDo{
+			nivelDos.iniciar()
+		}
+	}
+	
+	method ganar() {
+		musicaFondo.detenerMusica()
+		game.clear()
+		game.addVisual(gameOver)
+		keyboard.enter().onPressDo{
 			game.stop()
 		}
 	}
@@ -36,7 +46,7 @@ object configuracion {
 		musica.gameOver()
 		game.clear()
 		game.addVisual(gameOver)
-		keyboard.q().onPressDo{
+		keyboard.enter().onPressDo{
 			game.stop()
 		}
 	}

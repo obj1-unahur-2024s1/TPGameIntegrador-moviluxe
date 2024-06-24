@@ -16,7 +16,8 @@ object tanque{
 	const property esEnemigo = false
 	const property esMuro = true
 	const property esAliado = true
-		
+	const id = 0
+	
 	method image() { return "tanque" + self.direccion() + ".png"}
 	
 	method recibirDanio(){
@@ -50,7 +51,6 @@ object tanque{
 	
 	method irAlInicio() { position = game.at(1,0) }
 	method mirarDestino(destino) { direccion = destino } 
-	
 	method moverArriba(){
 		if (self.position().y() < game.height()-2){
 			if (!game.getObjectsIn(position.up(1)).any({o => o.esMuro()})){
@@ -75,7 +75,7 @@ object tanque{
 		if (!game.getObjectsIn(position.right(1)).any({o => o.esMuro()}))
 		     movimiento.derecha(self)
 		else self.position()
-}
+	}
 	
 	method moverIzquierda() { 
 		if(self.position().x()>0)
@@ -85,7 +85,7 @@ object tanque{
 	}
 		
 	method disparar(){
-        const bala = new Bala(image="bala.png", objeto = self,tick = "disparoPersonaje")
+        const bala = new Bala(image="bala.png", objeto = self,tick = "disparoPersonaje" + id.toString())
         game.addVisual(bala)
         bala.disparar()
         musica.disparo()

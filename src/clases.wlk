@@ -4,6 +4,7 @@ import configuraciones.*
 import wollok.game.*
 import tablero.*
 import juego.*
+import nivel2.*
 
 class Bala {
 	var property image
@@ -13,6 +14,7 @@ class Bala {
     const property esEnemigo = false
     const property esMuro = false
     const property esAliado = false
+    var id = ids.nuevoId()
     
     var property position = 
         if(direccion == "norte"){
@@ -24,26 +26,39 @@ class Bala {
         }else{
             objeto.position().left(1)
         }
-
-
-    method disparar(){
-           game.onTick(300, tick ,{
+	
+	method id() = id
+	
+   method disparar(){
+           game.onTick(300, tick + id.toString() ,{
             if(self.direccion() == "norte"){
                 position = position.up(1)
+                if(self.position().y() > game.height()-1) {
+                	self.detener()
+                }
                }else if(self.direccion() == "sur"){
                    position = position.down(1)
+                   if(self.position().y() == 0) {
+                	self.detener()
+                }
                }else if(self.direccion() == "este"){
                    position = position.right(1)
+                   if(self.position().x() > game.width()){
+                   	self.detener()
+                   }
                }else{
                    position = position.left(1)
+                   if(self.position().x() < 0) {
+                   	self.detener()
+                   }
             }
 
         })
 
     }
-
+    
     method detener(){
-        game.removeTickEvent(tick)
+        game.removeTickEvent(tick + self.id().toString())
         game.removeVisual(self)
     }
 
@@ -84,7 +99,7 @@ class TanqueEnemigo {
     method atacar() {
 	        if (self.cargado())
 	                self.cargado(false)
-	        const bala = new Bala(image="bala.png", objeto = self, tick = "balaenemiga")
+	        const bala = new Bala(image="bala.png", objeto = self, tick = "balaenemiga" + id.toString())
 	        game.addVisual(bala)
 	        bala.disparar()
 	        game.onCollideDo(bala, {algo => if(algo.esAliado())algo.impacto(bala)})
@@ -98,9 +113,12 @@ class TanqueEnemigo {
                 self.desaparecer()
                 game.removeTickEvent("ataque" + id.toString())
             	}
+            	
             if (tablero.enemigosDelMapa().isEmpty()){
- 				configuracion.pasarAlProximo()
- 				}
+            	if(juego.esNivelUno())
+            		configuracion.pasarAlProximo()
+ 				else configuracion.ganar()
+ 			}
         }
     }
 
@@ -115,7 +133,7 @@ class TanqueEnemigo {
 
     method impacto(unaBala){
         self.recibirDanio()
-        game.removeVisual(unaBala)
+        //game.removeVisual(unaBala)
     }
     
     method direccionAleatoria() {
@@ -196,7 +214,5 @@ class Obstaculo{
 }
 
 object ids{
-	method nuevoId(){
-		return 1.randomUpTo(50).truncate(0)
-	}
+	method nuevoId() = 1.randomUpTo(1000).truncate(0)
 }

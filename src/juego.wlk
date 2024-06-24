@@ -12,14 +12,7 @@ const corazon2= new Corazon(position=game.at(1,19))
 const corazon3= new Corazon(position=game.at(2,19))
 
 object juego {
-	//var nivel = 1
-	//method nivel() = nivel
-	//method siguienteNivel() { nivel += 1}
-	
-	/*method segundoNivel(){
-	 * game.clear()
-	 }
-	*/
+	var property esNivelUno = true
 	
 	method primerNivel(){
 		musicaFondo.iniciarMusica()
@@ -29,7 +22,7 @@ object juego {
 		game.addVisual(corazon3)
 		tanque.irAlInicio()
 		game.addVisual(tanque)
-		tablero.dibujarMuros()
+		tablero.dibujarElementos()
 		tablero.agregarEnemigos()
 		configuracion.teclado()
 	}
