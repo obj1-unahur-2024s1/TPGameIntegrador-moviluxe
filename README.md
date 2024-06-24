@@ -2,21 +2,24 @@
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Ybarra Gabriel 
+- D'Amore Zoe Abigail
+- Belascoain Hugo
+- Salone Gill Francisco Tomas
+- Colque Alejandro  
 
 ## Capturas
 
-(agregar)
 
 ## Reglas de Juego / Instrucciones
-
-(Escribirlas)
+- Maneja el tanque aliado para ir recorriendo el mapa, destruyendo a los tanques enemigos y así llegar a la victoria.
+- Los materiales que no se pueden atravesar son: ladrillos, piedra y agua.
+- Se puede pasar por las plantas.
+- Teclas: se mueve con las flechas, enter para pasar al siguiente nivel y espacio para disparar.
 
 
 ## Otros
 
 - Programación con Objetos 1/Universidad Nacional de Hurlingham
-- Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+- Versión de wollok: versión 3.0.0
+- Una vez terminado, no tenemos problemas en que el repositorio sea público
