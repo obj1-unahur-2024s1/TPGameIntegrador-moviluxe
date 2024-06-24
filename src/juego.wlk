@@ -16,7 +16,10 @@ object juego {
 	//method nivel() = nivel
 	//method siguienteNivel() { nivel += 1}
 	
-	//method segundoNivel(){}
+	/*method segundoNivel(){
+	 * game.clear()
+	 }
+	*/
 	
 	method primerNivel(){
 		musicaFondo.iniciarMusica()

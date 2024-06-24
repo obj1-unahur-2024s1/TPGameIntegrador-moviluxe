@@ -95,24 +95,27 @@ class TanqueEnemigo {
             vidas = 0.max(vidas - 1)
             if (vidas == 0) {
                 vidas = 0
-                tablero.eliminarEnemigo(self)
                 self.desaparecer()
                 game.removeTickEvent("ataque" + id.toString())
-            }
+            	}
+            if (tablero.enemigosDelMapa().isEmpty()){
+ 				configuracion.pasarAlProximo()
+ 				}
         }
     }
 
     method desaparecer(){
         const explosion = new Explosion (position = self.position())
         game.removeVisual(self)
-        game.addVisual(explosion)    
+        game.addVisual(explosion)
+        tablero.eliminarEnemigo(self)
     }
 
     method estaVivo() = self.vidas() >= 1
 
     method impacto(unaBala){
         self.recibirDanio()
-         game.removeVisual(unaBala)
+        game.removeVisual(unaBala)
     }
     
     method direccionAleatoria() {

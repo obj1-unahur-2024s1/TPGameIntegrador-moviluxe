@@ -90,8 +90,5 @@ object tanque{
         bala.disparar()
         musica.disparo()
         game.onCollideDo(bala,{algo => if(algo.esEnemigo())algo.impacto(bala)})
-      	if (tablero.enemigosDelMapa().isEmpty()){
- 			configuracion.pasarAlProximo()
- 		}
      }
 }

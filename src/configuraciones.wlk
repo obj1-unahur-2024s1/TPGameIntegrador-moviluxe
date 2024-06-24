@@ -25,7 +25,6 @@ object configuracion {
 	method pasarAlProximo(){
 		musicaFondo.detenerMusica()
 		musica.disparo()
-		game.clear()
 		game.addVisual(siguienteNivel)
 		keyboard.q().onPressDo{
 			game.stop()
