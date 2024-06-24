@@ -19,8 +19,16 @@ object musicaFondo {
 
 object musica {
 	
+	method gameOver() {
+		const gameOver = game.sound("gameOver.mp3")
+		gameOver.volume(0.3)
+		gameOver.play()
+	}
+	
 	method disparo()  {
-		game.sound("disparo.mp3").play()
+		const disparo = game.sound("disparo.mp3")
+		disparo.volume(0.2)
+		disparo.play()
 	}
 	
 }

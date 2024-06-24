@@ -4,6 +4,9 @@ import juego.*
 import tanque.*
 
 object tablero {
+	
+	const property enemigosDelMapa = []
+	
 	method dibujarMuros() {
 		self.agregarMuroEn(15,2, "ladrillos")
 		self.agregarMuroEn(10, 1, "agua")
@@ -170,20 +173,25 @@ object tablero {
 	}
 	
 	method agregarEnemigos() {
-        self.agregarEnemigosEn(17,18,"azul")
+        /*self.agregarEnemigosEn(17,18,"azul")
         self.agregarEnemigosEn(2,17,"naranja")
         self.agregarEnemigosEn(17,1,"violeta")
         self.agregarEnemigosEn(10,5,"azul")
-        self.agregarEnemigosEn(18,6,"naranja")
+        self.agregarEnemigosEn(18,6,"naranja")*/
         self.agregarEnemigosEn(0,4,"violeta")
     }
 
     method agregarEnemigosEn(x,y,color){
         const enemigo = new TanqueEnemigo(position= game.at(x,y), color= color)
+        enemigosDelMapa.add(enemigo)
         game.addVisual(enemigo)
         game.onCollideDo(enemigo, {algo => algo.detener()})
-        enemigo.movimientoEnemigos()
+        //enemigo.movimientoEnemigos()
 		enemigo.iniciarAtaque()
+    }
+    
+    method eliminarEnemigo(unEnemigo){
+    	enemigosDelMapa.remove(unEnemigo)
     }
 }
 

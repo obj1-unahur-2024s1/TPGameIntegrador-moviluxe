@@ -16,6 +16,8 @@ object juego {
 	//method nivel() = nivel
 	//method siguienteNivel() { nivel += 1}
 	
+	//method segundoNivel(){}
+	
 	method primerNivel(){
 		musicaFondo.iniciarMusica()
 		game.addVisual(fondo)
@@ -37,6 +39,7 @@ object juego {
 		game.addVisual(bienvenida)
 		keyboard.enter().onPressDo{
 			game.removeVisual(bienvenida)
+			game.clear()
 			self.primerNivel()
 		}
 		game.start()

@@ -95,6 +95,7 @@ class TanqueEnemigo {
             vidas = 0.max(vidas - 1)
             if (vidas == 0) {
                 vidas = 0
+                tablero.eliminarEnemigo(self)
                 self.desaparecer()
                 game.removeTickEvent("ataque" + id.toString())
             }
@@ -143,7 +144,9 @@ class TanqueEnemigo {
         if (self.position().y() < game.height()-3){
             if (!game.getObjectsIn(position.up(1)).any({o => o.esMuro()})){
                 movimiento.arriba(self) 
-            }else{self.position()}
+            }else{
+            	self.position()
+            }
         }
     }
 
@@ -151,7 +154,8 @@ class TanqueEnemigo {
         if (self.position().y()!= 0)
             if (!game.getObjectsIn(position.down(1)).any({o => o.esMuro()})){
                 movimiento.abajo(self) 
-            }else{self.position()
+            }else{
+            	self.position()
         }
     }
 
@@ -169,7 +173,7 @@ class TanqueEnemigo {
 
 class Explosion {
     var property position
-    var image = "burst.png"
+    const image = "burst.png"
     var property esMuro = false
     const property esAliado = false
     const property esEnemigo = false
@@ -183,11 +187,13 @@ class Obstaculo{
 	const property image
 	const property esEnemigo = false
 	const property esAliado = false
+	
+	method detener() {}
+	
 }
 
 object ids{
 	method nuevoId(){
 		return 1.randomUpTo(50).truncate(0)
 	}
-	
 }

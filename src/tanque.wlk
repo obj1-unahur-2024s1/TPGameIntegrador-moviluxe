@@ -4,6 +4,7 @@ import clases.*
 import juego.*
 import sonidos.*
 import configuraciones.*
+import tablero.*
 
 object tanque{
 	var property position
@@ -47,16 +48,16 @@ object tanque{
  		}
  	}
 	
-	method irAlInicio() { 
-		position = game.at(1,0)
-	}
-	method mirarDestino(destino) { direccion = destino} 
+	method irAlInicio() { position = game.at(1,0) }
+	method mirarDestino(destino) { direccion = destino } 
 	
 	method moverArriba(){
 		if (self.position().y() < game.height()-2){
 			if (!game.getObjectsIn(position.up(1)).any({o => o.esMuro()})){
 				movimiento.arriba(self) 
-			}else{self.position()}
+			}else{
+				self.position()
+			}
 		}
 	}
 	
@@ -64,24 +65,33 @@ object tanque{
 		if (self.position().y()!= 0)
 			if (!game.getObjectsIn(position.down(1)).any({o => o.esMuro()})){
 				movimiento.abajo(self) 
-			}else{self.position()
+			}else{
+				self.position()
 		}
 	}
 	
-	method moverDerecha() { if(self.position().x()< game.width()-1)
+	method moverDerecha() { 
+		if(self.position().x()< game.width()-1)
 		if (!game.getObjectsIn(position.right(1)).any({o => o.esMuro()}))
 		     movimiento.derecha(self)
-		else self.position()}
+		else self.position()
+}
 	
-	method moverIzquierda() { if(self.position().x()>0)
+	method moverIzquierda() { 
+		if(self.position().x()>0)
 		if (!game.getObjectsIn(position.left(1)).any({o => o.esMuro()}))
 		movimiento.izquierda(self)
-		else self.position()}
+		else self.position()
+	}
+		
 	method disparar(){
-        const bala = new Bala(image="bala.png", objeto = self,tick = "disparoPersonaje" )
-            game.addVisual(bala)
-            bala.disparar()
-            musica.disparo()
-            game.onCollideDo(bala,{algo => if(algo.esEnemigo())algo.impacto(bala)} )
+        const bala = new Bala(image="bala.png", objeto = self,tick = "disparoPersonaje")
+        game.addVisual(bala)
+        bala.disparar()
+        musica.disparo()
+        game.onCollideDo(bala,{algo => if(algo.esEnemigo())algo.impacto(bala)})
+      	if (tablero.enemigosDelMapa().isEmpty()){
+ 			configuracion.pasarAlProximo()
+ 		}
      }
 }

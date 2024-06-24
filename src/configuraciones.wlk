@@ -22,14 +22,23 @@ object configuracion {
 		keyboard.left().onPressDo {tanque.moverIzquierda()}
 	}
 	
-	method perder(){
+	method pasarAlProximo(){
 		musicaFondo.detenerMusica()
 		musica.disparo()
+		game.clear()
+		game.addVisual(siguienteNivel)
+		keyboard.q().onPressDo{
+			game.stop()
+		}
+	}
+	
+	method perder(){
+		musicaFondo.detenerMusica()
+		musica.gameOver()
 		game.clear()
 		game.addVisual(gameOver)
 		keyboard.q().onPressDo{
 			game.stop()
 		}
 	}
-	
 }
