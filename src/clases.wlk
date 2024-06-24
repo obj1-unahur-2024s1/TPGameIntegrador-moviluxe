@@ -112,7 +112,6 @@ class TanqueEnemigo {
     method impacto(unaBala){
         self.recibirDanio()
          game.removeVisual(unaBala)
-         
     }
     
     method direccionAleatoria() {

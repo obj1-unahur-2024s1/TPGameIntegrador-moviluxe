@@ -4,10 +4,11 @@ import movimientos.*
 import clases.*
 import tablero.*
 import pantalla.*
+import sonidos.*
 
 object configuracion {
 	
-		method teclado(){
+	method teclado(){
         keyboard.space().onPressDo {
             if (tanque.cargado()){
                 tanque.cargado(false)
@@ -19,6 +20,16 @@ object configuracion {
 		keyboard.down().onPressDo {tanque.moverAbajo()}
 		keyboard.right().onPressDo {tanque.moverDerecha()}
 		keyboard.left().onPressDo {tanque.moverIzquierda()}
+	}
+	
+	method perder(){
+		musicaFondo.detenerMusica()
+		musica.disparo()
+		game.clear()
+		game.addVisual(gameOver)
+		keyboard.q().onPressDo{
+			game.stop()
+		}
 	}
 	
 }

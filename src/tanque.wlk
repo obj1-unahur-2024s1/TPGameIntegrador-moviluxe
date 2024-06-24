@@ -3,6 +3,7 @@ import movimientos.*
 import clases.*
 import juego.*
 import sonidos.*
+import configuraciones.*
 
 object tanque{
 	var property position
@@ -41,6 +42,9 @@ object tanque{
 	method impacto(unaBala){
 		self.recibirDanio()
  		game.removeVisual(unaBala)
+ 		if (not self.estaVivo()){
+ 			configuracion.perder()
+ 		}
  	}
 	
 	method irAlInicio() { 
