@@ -11,6 +11,7 @@ class Pantalla {
 const gameOver = new Pantalla(image = "gameOver.png", position = game.origin())
 const bienvenida = new Pantalla(image = "fondoBienvenida.png", position = game.origin())
 const siguienteNivel = new Pantalla(image = "siguienteNivel.png", position = game.origin())
+const ganaste = new Pantalla(image = "ganaste.png", position = game.origin())
 
 object fondo {
 	const property image = "fondo.png"

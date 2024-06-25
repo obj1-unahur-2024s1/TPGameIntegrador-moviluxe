@@ -158,9 +158,9 @@ object nivelDos{
 	}	
 	
 	method agregarEnemigos() {
-		tablero.agregarEnemigosEn(10,17,"azul")
-        //tablero.agregarEnemigosEn(18,18,"naranja")
-        //tablero.agregarEnemigosEn(3,14,"violeta")
+		//tablero.agregarEnemigosEn(10,17,"azul")
+        tablero.agregarEnemigosEn(18,18,"naranja")
+        tablero.agregarEnemigosEn(3,14,"violeta")
         tablero.agregarEnemigosEn(18,10,"azul")
         tablero.agregarEnemigosEn(10,3,"violeta")
 	}

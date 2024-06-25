@@ -200,7 +200,7 @@ object tablero {
         enemigosDelMapa.add(enemigo)
         game.addVisual(enemigo)
         game.onCollideDo(enemigo, {algo => algo.detener()})
-       // enemigo.movimientoEnemigos()
+        enemigo.movimientoEnemigos()
 		enemigo.iniciarAtaque()
     }
     

@@ -31,4 +31,10 @@ object musica {
 		disparo.play()
 	}
 	
+	method musicaVictoria(){
+		const victoria = game.sound("victoria.mp3")
+		victoria.volume(0.2)
+		victoria.play()
+	}
+	
 }

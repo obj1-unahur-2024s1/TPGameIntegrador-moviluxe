@@ -35,7 +35,8 @@ object configuracion {
 	method ganar() {
 		musicaFondo.detenerMusica()
 		game.clear()
-		game.addVisual(gameOver)
+		game.addVisual(ganaste)
+		musica.musicaVictoria()
 		keyboard.enter().onPressDo{
 			game.stop()
 		}
