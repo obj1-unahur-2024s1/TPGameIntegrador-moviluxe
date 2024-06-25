@@ -5,6 +5,7 @@ import wollok.game.*
 import tablero.*
 import juego.*
 import nivel2.*
+//Acá están las clases generales de cada elemento visual
 
 class Bala {
 	var property image
@@ -15,7 +16,7 @@ class Bala {
     const property esMuro = false
     const property esAliado = false
     var id = ids.nuevoId()
-    
+ 	
     var property position = 
         if(direccion == "norte"){
             objeto.position().up(1)
@@ -28,7 +29,7 @@ class Bala {
         }
 	
 	method id() = id
-	
+	//este método hace la secuencia de movimiento de cada bala cuando algún tanque enemigo o aliado dispara
    method disparar(){
            game.onTick(300, tick + id.toString() ,{
             if(self.direccion() == "norte"){
@@ -56,14 +57,16 @@ class Bala {
         })
 
     }
-    
+    //Elimina el tick de disparo y se remueve la visual
     method detener(){
         game.removeTickEvent(tick + self.id().toString())
         game.removeVisual(self)
+        
     }
 
 }
 
+//se aplican esas propiedades para que las colisiones no tiren error
 class Corazon {
 	const property position 
 	var property esMuro = false
@@ -71,6 +74,7 @@ class Corazon {
     const property esAliado = false
 	method image() = "corazon.png"
 }
+
 
 class TanqueEnemigo {
 	
@@ -83,6 +87,7 @@ class TanqueEnemigo {
     var property esEnemigo = true
     const property esMuro = true
     const property esAliado = false
+    //a cada tanque enemigo se le genera un nuevo id aleatorio para posteriormente poder eliminar el tick del disparo
     var id = ids.nuevoId()
     
     
@@ -90,12 +95,13 @@ class TanqueEnemigo {
 
     method image() { return "tanque" + color + self.direccion() + ".png"}
 
-	
+	//Inicia un disparo atuomatico de un tanque enemigo cada 4 segundos
     method iniciarAtaque() {
-    		game.onTick(4000, "ataque" + id.toString(), {self.atacar()})
+    		game.onTick(2000, "ataque" + id.toString(), {self.atacar()})
         	game.schedule(2000,{self.cargado(true)})
     }
-
+	
+	
     method atacar() {
 	        if (self.cargado())
 	                self.cargado(false)
@@ -135,7 +141,7 @@ class TanqueEnemigo {
         self.recibirDanio()
         
     }
-    
+    //se elije una direccion aleatoria para que el tanque enemigo pueda moverse
     method direccionAleatoria() {
 
         const elegirDireccion= ["norte","sur","oeste","este"]
@@ -145,7 +151,7 @@ class TanqueEnemigo {
     }
 
     method movimientoEnemigos(){
-
+	//genera nuevos movimientos aleatorios en los enemigos
         game.onTick(1000, "movimientoEnemigos", {
 
             direccion = self.direccionAleatoria()
@@ -212,7 +218,7 @@ class Obstaculo{
 	method detener() {}
 	
 }
-
+//genera numero aleatorios para asignar ids
 object ids{
 	method nuevoId() = 1.randomUpTo(1000).truncate(0)
 }

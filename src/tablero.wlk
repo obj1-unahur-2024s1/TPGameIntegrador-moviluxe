@@ -7,6 +7,7 @@ object tablero {
 	
 	const property enemigosDelMapa = []
 	
+	//Se genera los elementos del mapa
 	method dibujarElementos() {
 		self.dibujarMuros()
 		self.dibujarAguas()
@@ -176,6 +177,7 @@ object tablero {
 		self.agregarPlantitaEn(6, 10)
 	}	
 	
+	//se instancia los objetos visuales de cada elemento
 	method agregarPlantitaEn(x,y) {
 		const plantita = new Obstaculo(position = game.at(x,y), esMuro = false, image = "plantitas.png")
 		game.addVisual(plantita)
@@ -195,6 +197,7 @@ object tablero {
         self.agregarEnemigosEn(0,4,"violeta")
     }
 
+	//se instancia los tanques enemigos y se agregan con sus respectivos colores y en su posicion
     method agregarEnemigosEn(x,y,color){
         const enemigo = new TanqueEnemigo(position= game.at(x,y), color= color)
         enemigosDelMapa.add(enemigo)
