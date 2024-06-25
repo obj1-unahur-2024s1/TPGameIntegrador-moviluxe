@@ -9,7 +9,8 @@
 - Colque Alejandro  
 
 ## Capturas
-
+![](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-moviluxe/blob/master/nivel1.png)
+![](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-moviluxe/blob/master/nivel2.png)
 
 ## Reglas de Juego / Instrucciones
 - Maneja el tanque aliado para ir recorriendo el mapa, destruyendo a los tanques enemigos y así llegar a la victoria.
