@@ -25,6 +25,7 @@ object configuracion {
 	}
 	
 	method pasarAlProximo(){
+		tablero.resetearCronometro()
 		game.addVisual(siguienteNivel)
 		juego.esNivelUno(false)
 		keyboard.enter().onPressDo{
@@ -34,21 +35,23 @@ object configuracion {
 	
 	method ganar() {
 		musicaFondo.detenerMusica()
+		tablero.resetearCronometro()
 		game.clear()
 		game.addVisual(ganaste)
 		musica.musicaVictoria()
 		keyboard.enter().onPressDo{
-			game.stop()
+			juego.resetear()
 		}
 	}
 	
 	method perder(){
 		musicaFondo.detenerMusica()
+		tablero.resetearCronometro()
 		musica.gameOver()
 		game.clear()
 		game.addVisual(gameOver)
 		keyboard.enter().onPressDo{
-			game.stop()
+			juego.resetear()
 		}
 	}
 }

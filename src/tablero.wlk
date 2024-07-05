@@ -2,6 +2,17 @@ import wollok.game.*
 import clases.*
 import juego.*
 import tanque.*
+import configuraciones.*
+
+class ElementosDelTablero {
+	
+	var property esMuro
+    const property esEnemigo
+    const property esAliado 
+	
+	method detener() {	}
+	
+}
 
 object tablero {
 	
@@ -9,6 +20,7 @@ object tablero {
 	
 	//Se genera los elementos del mapa
 	method dibujarElementos() {
+		self.dibujarCronometro()
 		self.dibujarMuros()
 		self.dibujarAguas()
 		self.dibujarPlantitas()
@@ -118,6 +130,7 @@ object tablero {
 		self.agregarMuroEn(12, 8, "piedra")
 		self.agregarMuroEn(15,17,"piedra")
 	}
+	
 	method dibujarAguas(){
 		self.agregarMuroEn(10, 2, "agua")
 		self.agregarMuroEn(9, 2, "agua")
@@ -177,13 +190,23 @@ object tablero {
 		self.agregarPlantitaEn(6, 10)
 	}	
 	
+	method dibujarCronometro(){
+		cronometro.mostrar()
+		cronometro.iniciar()
+	}
+	
+	method resetearCronometro(){
+		cronometro.detener()
+		cronometro.resetear()
+	}
+	
 	//se instancia los objetos visuales de cada elemento
 	method agregarPlantitaEn(x,y) {
-		const plantita = new Obstaculo(position = game.at(x,y), esMuro = false, image = "plantitas.png")
+		const plantita = new Obstaculo(esAliado = false, esEnemigo = false, position = game.at(x,y), esMuro = false, image = "plantitas.png")
 		game.addVisual(plantita)
 	}
 	method agregarMuroEn(x, y, material) {
-		const muro = new Obstaculo(position = game.at(x,y), esMuro = true, image= material + ".png")
+		const muro = new Obstaculo(esAliado = false, esEnemigo = false, position = game.at(x,y), esMuro = true, image= material + ".png")
 		game.addVisual(muro)
 		game.onCollideDo(muro, {algo => algo.detener()})
 	}
@@ -199,7 +222,7 @@ object tablero {
 
 	//se instancia los tanques enemigos y se agregan con sus respectivos colores y en su posicion
     method agregarEnemigosEn(x,y,color){
-        const enemigo = new TanqueEnemigo(position= game.at(x,y), color= color)
+        const enemigo = new TanqueEnemigo(esAliado = false, esEnemigo = true, esMuro = true, position= game.at(x,y), color= color)
         enemigosDelMapa.add(enemigo)
         game.addVisual(enemigo)
         game.onCollideDo(enemigo, {algo => algo.detener()})
@@ -213,3 +236,55 @@ object tablero {
     
 }
 
+object cronometro{
+    var tiempo = 300
+    const unidad = new Digito(esMuro = true, esAliado = false, esEnemigo = false, position= game.at(19,19))
+    const decena = new Digito(esMuro = true, esAliado = false, esEnemigo = false, position= game.at(18,19))
+	const centena = new Digito(esMuro = true, esAliado = false, esEnemigo = false, position= game.at(17,19))
+	
+    method mostrar(){
+        game.addVisual(decena)
+        game.addVisual(unidad)
+        game.addVisual(centena)
+      }
+
+    method reset(){
+        self.detener()
+        tiempo = 300
+        //Detener y vuelva a 300
+    }
+
+
+    method iniciar(){
+        game.onTick(1000,"Temporizador",{=>
+            tiempo= tiempo - 1
+            var un = tiempo%10
+            var de = (tiempo/10).truncate(0) % 10
+            var cen = (tiempo/100).truncate(0) 
+            unidad.valor(un)
+            decena.valor(de)
+            centena.valor(cen)
+            if (tiempo == 0 || tablero.enemigosDelMapa().isEmpty()){
+                if (tablero.enemigosDelMapa().isEmpty()){
+                	configuracion.pasarAlProximo()
+                }else{
+                    configuracion.perder()
+                }
+            }
+        })
+        //Decrementar desde 300 hasta 0 con onTick
+
+        //Logica para obtener el tiempo de la unidad y la decena
+    }
+
+    method detener(){
+        //Remover el onTick
+        game.removeTickEvent("Temporizador")
+    }
+
+    method resetear(){
+    	//resetea el tiempo en 300
+        tiempo = 300
+    }
+
+}

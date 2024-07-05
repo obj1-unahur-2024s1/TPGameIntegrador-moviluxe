@@ -67,26 +67,19 @@ class Bala {
 }
 
 //se aplican esas propiedades para que las colisiones no tiren error
-class Corazon {
+class Corazon inherits ElementosDelTablero{
 	const property position 
-	var property esMuro = false
-    const property esEnemigo = false
-    const property esAliado = false
 	method image() = "corazon.png"
 }
 
 
-class TanqueEnemigo {
-	
+class TanqueEnemigo inherits ElementosDelTablero{
 	var property position 
     var property image = self.direccion()
     var property direccion = "sur"
     var property vidas = 3
     const property color
     var property cargado = true
-    var property esEnemigo = true
-    const property esMuro = true
-    const property esAliado = false
     //a cada tanque enemigo se le genera un nuevo id aleatorio para posteriormente poder eliminar el tick del disparo
     var id = ids.nuevoId()
     
@@ -119,7 +112,6 @@ class TanqueEnemigo {
                 self.desaparecer()
                 game.removeTickEvent("ataque" + id.toString())
             	}
-            	
             if (tablero.enemigosDelMapa().isEmpty()){
             	if(juego.esNivelUno())
             		configuracion.pasarAlProximo()
@@ -129,7 +121,7 @@ class TanqueEnemigo {
     }
 
     method desaparecer(){
-        const explosion = new Explosion (position = self.position())
+        const explosion = new Explosion (esMuro = false, esEnemigo = false, esAliado = false, position = self.position())
         game.removeVisual(self)
         game.addVisual(explosion)
         tablero.eliminarEnemigo(self)
@@ -198,25 +190,24 @@ class TanqueEnemigo {
 
 }
 
-class Explosion {
+class Explosion inherits ElementosDelTablero{
     var property position
     const image = "burst.png"
-    var property esMuro = false
-    const property esAliado = false
-    const property esEnemigo = false
 
     method image() = image
 }
 
-class Obstaculo{	
+class Obstaculo inherits ElementosDelTablero{	
 	var property position
-	const property esMuro
 	const property image
-	const property esEnemigo = false
-	const property esAliado = false
 	
-	method detener() {}
+}
+
+class Digito inherits ElementosDelTablero{
+	const property position 
+	var property valor = 0
 	
+	method image() = valor.toString() + ".png"
 }
 //genera numero aleatorios para asignar ids
 object ids{

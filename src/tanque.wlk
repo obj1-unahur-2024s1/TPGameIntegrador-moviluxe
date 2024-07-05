@@ -35,7 +35,7 @@ object tanque{
 	}
 	//Crea una explosion que cuando el tanque aliado muere, aparece una explosion
 	method desaparecer(){
-		const explosion = new Explosion (position = self.position())
+		const explosion = new Explosion (esMuro = false, esEnemigo = false, esAliado = false, position = self.position())
 		game.removeVisual(self)
         game.addVisual(explosion)    
 	}
@@ -45,6 +45,7 @@ object tanque{
 	method impacto(unaBala){
 		self.recibirDanio()
  		if (not self.estaVivo()){
+ 			vidas = 3
  			configuracion.perder()
  		}
  	}

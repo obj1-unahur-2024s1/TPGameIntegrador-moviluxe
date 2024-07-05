@@ -6,13 +6,16 @@ object musicaFondo {
 	
 	method iniciarMusica(){
 		fondo.shouldLoop(true)
-		fondo.shouldLoop(true)
-		game.schedule(500, { fondo.play()} )
 		fondo.volume(0.1)
+		game.schedule(500, { fondo.play()} )
 	}
 	
 	method detenerMusica(){
-		fondo.stop()
+		fondo.pause()
+	}
+	
+	method resumirCancion(){
+		fondo.resume()
 	}
 	
 }
